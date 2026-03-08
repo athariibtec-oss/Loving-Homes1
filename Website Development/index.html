@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<title>الرئيسية</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#e6e6e6;
+display:flex;
+flex-direction:column;
+min-height:100vh;
+font-size:16px;
+}
+
+/* الشعار */
+
+.logo{
+position:absolute;
+top:10px;
+left:10px;
+width:110px;
+}
+
+/* الهيدر */
+
+header{
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.nav-box{
+background:#d9d9d9;
+padding:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.nav-btn{
+background:white;
+color:black;
+text-decoration:none;
+padding:8px 18px;
+border:1px solid #999;
+border-radius:5px;
+font-weight:bold;
+}
+
+.lang-btn{
+background:white;
+border:1px solid #999;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.search-box{
+padding:6px;
+border:1px solid #999;
+border-radius:5px;
+}
+
+.search-btn{
+padding:6px 10px;
+border:1px solid #999;
+background:white;
+cursor:pointer;
+}
+
+section{
+padding:40px;
+flex:1;
+background:#f2f2f2;
+margin:20px;
+border:1px solid #999;
+}
+
+.content{
+display:flex;
+gap:40px;
+align-items:flex-start;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+/* carousel */
+
+.carousel{
+position:relative;
+width:100%;
+max-width:600px;
+overflow:hidden;
+border:1px solid #999;
+border-radius:5px;
+}
+
+.carousel-inner{
+display:flex;
+transition:transform 0.5s ease-in-out;
+}
+
+.carousel-inner img{
+width:100%;
+min-width:100%;
+max-height:400px;
+object-fit:cover;
+border-radius:5px;
+}
+
+.text-box{
+background:#f5f5f5;
+padding:20px;
+line-height:1.8;
+border:1px solid #999;
+flex:1;
+min-width:300px;
+}
+
+footer{
+text-align:center;
+padding:15px;
+background:#d9d9d9;
+}
+
+mark{
+background:yellow;
+}
+
+</style>
+
+<script>
+
+let currentLang = localStorage.getItem("lang") || "ar";
+let fontSize = localStorage.getItem("fontSize") || 16;
+
+let textAr =
+"موقع Loving Homes هو فندق مخصص للكلاب يهدف إلى توفير بيئة آمنة ومريحة للحيوانات الأليفة عندما يكون أصحابها غير قادرين على الاعتناء بها لفترة معينة. يقدم الفندق خدمات متعددة تساعد على راحة الكلاب وسعادتها حيث توجد مناطق لعب داخلية وخارجية تسمح للكلاب بالحركة واللعب بحرية كما توجد غرف إقامة مريحة ومجهزة بنظام تدفئة وتبريد مناسب. يوفر الفندق أيضاً مراعي خارجية آمنة وخدمات بيطرية متوفرة على مدار 24 ساعة لضمان سلامة الحيوانات الأليفة. كما يتم تقديم خدمات العناية والتنظيف للكلاب بالإضافة إلى متابعة يومية للحيوانات من خلال الصور والتقارير التي يتم إرسالها لأصحابها.";
+
+let textEn =
+"Loving Homes is a dog hotel that aims to provide a safe and comfortable environment for pets when their owners are unable to take care of them for a period of time. The hotel offers many services including indoor and outdoor play areas comfortable accommodation rooms and professional care for pets.";
+
+window.onload=function(){
+document.body.style.fontSize=fontSize+"px";
+applyLanguage();
+startCarousel();
+};
+
+function changeLanguage(){
+currentLang = currentLang==="ar" ? "en" : "ar";
+localStorage.setItem("lang",currentLang);
+applyLanguage();
+}
+
+function applyLanguage(){
+
+document.documentElement.lang=currentLang;
+document.documentElement.dir=currentLang==="ar"?"rtl":"ltr";
+
+document.getElementById("nav-home").innerText=currentLang==="ar"?"الصفحة الرئيسية":"Home";
+document.getElementById("nav-facilities").innerText=currentLang==="ar"?"المرافق":"Facilities";
+document.getElementById("nav-packages").innerText=currentLang==="ar"?"الحزم":"Packages";
+document.getElementById("nav-help").innerText=currentLang==="ar"?"المساعدة":"Help";
+document.getElementById("nav-services").innerText=currentLang==="ar"?"خدماتنا":"Services";
+document.getElementById("nav-contact").innerText=currentLang==="ar"?"اتصل بنا":"Contact";
+
+document.getElementById("title").innerText=
+currentLang==="ar"?"مرحبا بكم في Loving Homes":"Welcome to Loving Homes";
+
+document.getElementById("text").innerText=
+currentLang==="ar"?textAr:textEn;
+
+}
+
+function searchText(){
+
+let input=document.getElementById("search").value;
+let text=document.getElementById("text");
+let original=currentLang==="ar"?textAr:textEn;
+
+if(input==""){
+text.innerText=original;
+return;
+}
+
+let regex=new RegExp(input,"gi");
+
+text.innerHTML=original.replace(regex,function(match){
+return "<mark>"+match+"</mark>";
+});
+
+}
+
+let currentSlide=0;
+
+function startCarousel(){
+
+const slides=document.querySelectorAll(".carousel-inner img");
+const total=slides.length;
+
+setInterval(function(){
+
+currentSlide++;
+
+if(currentSlide>=total){
+currentSlide=0;
+}
+
+let direction = document.documentElement.dir === "rtl" ? 1 : -1;
+
+document.querySelector(".carousel-inner").style.transform =
+"translateX("+(currentSlide*100*direction)+"%)";
+
+},3000);
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<img src="images/Image11.png" class="logo" alt="logo">
+
+<h1 id="title">مرحبا بكم في Loving Homes</h1>
+
+<div class="nav-box">
+
+<button class="lang-btn" onclick="changeLanguage()">🌐</button>
+
+<a href="index.html" class="nav-btn" id="nav-home">الصفحة الرئيسية</a>
+<a href="facilities.html" class="nav-btn" id="nav-facilities">المرافق</a>
+<a href="packages.html" class="nav-btn" id="nav-packages">الحزم</a>
+<a href="help.html" class="nav-btn" id="nav-help">المساعدة</a>
+<a href="services.html" class="nav-btn" id="nav-services">خدماتنا</a>
+<a href="contact.html" class="nav-btn" id="nav-contact">اتصل بنا</a>
+
+<input type="text" id="search" class="search-box" placeholder="بحث">
+<button class="search-btn" onclick="searchText()">🔍</button>
+
+</div>
+
+</header>
+
+<section>
+
+<div class="content">
+
+<div class="carousel">
+<div class="carousel-inner">
+
+<img src="images/1.jpg">
+<img src="images/8.jpg">
+<img src="images/9.jpg">
+<img src="images/10.jpg">
+
+</div>
+</div>
+
+<div class="text-box">
+<p id="text"></p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 Loving Homes</p>
+</footer>
+
+</body>
+</html>

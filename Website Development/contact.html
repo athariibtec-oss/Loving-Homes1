@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<title>اتصل بنا</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#e6e6e6;
+display:flex;
+flex-direction:column;
+min-height:100vh;
+font-size:16px;
+}
+
+/* الشعار */
+.logo{
+position:absolute;
+top:10px;
+left:10px;
+width:110px;
+}
+
+header{
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.nav-box{
+background:#d9d9d9;
+padding:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.nav-btn{
+background:white;
+padding:8px 18px;
+border:1px solid #999;
+border-radius:5px;
+text-decoration:none;
+color:black;
+font-weight:bold;
+transition:0.3s;
+}
+
+.nav-btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 6px rgba(0,0,0,0.2);
+}
+
+.lang-btn,.access-btn{
+background:white;
+border:1px solid #999;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.access-btn{
+font-weight:bold;
+}
+
+.search-box{
+padding:6px;
+border:1px solid #999;
+border-radius:5px;
+}
+
+.search-btn{
+padding:6px 10px;
+border:1px solid #999;
+background:white;
+cursor:pointer;
+}
+
+section{
+flex:1;
+padding:40px;
+}
+
+.contact-box{
+background:white;
+padding:30px;
+max-width:600px;
+margin:auto;
+border:1px solid #999;
+line-height:1.8;
+animation:fadeIn 1s;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.contact-box h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #999;
+border-radius:5px;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+.counter{
+font-size:12px;
+text-align:left;
+color:#666;
+}
+
+.contact-btn{
+margin-top:15px;
+padding:12px 25px;
+background:#b30000;
+color:white;
+border:none;
+cursor:pointer;
+border-radius:4px;
+transition:0.3s;
+}
+
+.contact-btn:hover{
+background:#800000;
+}
+
+.success{
+background:#ccffcc;
+padding:10px;
+margin-top:15px;
+display:none;
+text-align:center;
+border:1px solid green;
+}
+
+.company-info{
+margin-top:30px;
+padding-top:20px;
+border-top:1px solid #ccc;
+}
+
+footer{
+text-align:center;
+padding:15px;
+background:#d9d9d9;
+}
+
+mark{
+background:yellow;
+}
+
+</style>
+
+<script>
+let currentLang = localStorage.getItem("lang") || "ar";
+let fontSize = localStorage.getItem("fontSize") || 16;
+let contactData = {
+  name:"",
+  email:"",
+  message:""
+};
+
+window.onload=function(){
+document.body.style.fontSize=fontSize+"px";
+applyLanguage();
+}
+
+function changeLanguage(){
+currentLang=currentLang==="ar"?"en":"ar";
+localStorage.setItem("lang",currentLang);
+applyLanguage();
+}
+
+function increaseFont(){
+fontSize=parseInt(fontSize)+2;
+document.body.style.fontSize=fontSize+"px";
+localStorage.setItem("fontSize",fontSize);
+}
+
+function decreaseFont(){
+fontSize=Math.max(12,fontSize-2);
+document.body.style.fontSize=fontSize+"px";
+localStorage.setItem("fontSize",fontSize);
+}
+
+function applyLanguage(){
+
+document.documentElement.dir=currentLang==="ar"?"rtl":"ltr";
+
+document.getElementById("title").innerText=currentLang==="ar"?"اتصل بنا":"Contact Us";
+
+document.getElementById("nav-home").innerText=currentLang==="ar"?"الرئيسية":"Home";
+document.getElementById("nav-facilities").innerText=currentLang==="ar"?"المرافق":"Facilities";
+document.getElementById("nav-packages").innerText=currentLang==="ar"?"الحزم":"Packages";
+document.getElementById("nav-help").innerText=currentLang==="ar"?"المساعدة":"Help";
+document.getElementById("nav-services").innerText=currentLang==="ar"?"خدماتنا":"Services";
+document.getElementById("nav-contact").innerText=currentLang==="ar"?"اتصل بنا":"Contact";
+
+document.getElementById("btn-big").innerText=currentLang==="ar"?"تكبير النص":"Increase Text";
+document.getElementById("btn-small").innerText=currentLang==="ar"?"تصغير النص":"Decrease Text";
+
+document.getElementById("name").placeholder=currentLang==="ar"?"الاسم":"Name";
+document.getElementById("email").placeholder=currentLang==="ar"?"الايميل":"Email";
+document.getElementById("message").placeholder=currentLang==="ar"?"اكتب رسالتك":"Write your message";
+
+document.getElementById("sendBtn").innerText=currentLang==="ar"?"ارسال":"Send";
+document.getElementById("companyTitle").innerText=currentLang==="ar"?"معلومات الشركة":"Company Info";
+
+document.getElementById("search").placeholder=currentLang==="ar"?"بحث":"Search";
+
+}
+
+function validateForm(){
+let name=document.getElementById("name").value.trim();
+let email=document.getElementById("email").value.trim();
+let message=document.getElementById("message").value.trim();
+let emailPattern=/^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+if(name==""||email==""||message==""){
+alert(currentLang==="ar"?"يرجى تعبئة جميع الحقول":"Please fill all fields");
+return;
+}
+if(!email.match(emailPattern)){
+alert(currentLang==="ar"?"الايميل غير صحيح":"Invalid email");
+return;
+}
+document.getElementById("success").style.display="block";
+document.getElementById("name").value="";
+document.getElementById("email").value="";
+document.getElementById("message").value="";
+updateCounter();
+}
+
+function updateCounter(){
+let text=document.getElementById("message").value;
+document.getElementById("counter").innerText=text.length+"/200";
+}
+
+function searchText(){
+let input=document.getElementById("search").value.trim().toLowerCase();
+let allText = [
+  "الرئيسية","المرافق","الحزم","المساعدة","خدماتنا","اتصل بنا",
+  "Home","Facilities","Packages","Help","Services","Contact Us"
+];
+if(input===""){
+document.querySelectorAll(".nav-btn").forEach(b=>b.innerHTML=b.dataset.text);
+return;
+}
+document.querySelectorAll(".nav-btn").forEach(b=>{
+if(b.dataset.text.toLowerCase().includes(input)){
+b.innerHTML="<mark>"+b.dataset.text+"</mark>";
+}else{
+b.innerHTML=b.dataset.text;
+}
+});
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<img src="images/Image11.png" class="logo" alt="logo">
+
+<h1 id="title">اتصل بنا</h1>
+
+<div class="nav-box">
+
+<button class="lang-btn" onclick="changeLanguage()">🌐</button>
+<button class="access-btn" id="btn-big" onclick="increaseFont()">تكبير النص</button>
+<button class="access-btn" id="btn-small" onclick="decreaseFont()">تصغير النص</button>
+
+<a href="index.html" class="nav-btn" id="nav-home" data-text="الرئيسية">الرئيسية</a>
+<a href="facilities.html" class="nav-btn" id="nav-facilities" data-text="المرافق">المرافق</a>
+<a href="packages.html" class="nav-btn" id="nav-packages" data-text="الحزم">الحزم</a>
+<a href="help.html" class="nav-btn" id="nav-help" data-text="المساعدة">المساعدة</a>
+<a href="services.html" class="nav-btn" id="nav-services" data-text="خدماتنا">خدماتنا</a>
+<a href="contact.html" class="nav-btn" id="nav-contact" data-text="اتصل بنا">اتصل بنا</a>
+
+<input type="text" id="search" class="search-box">
+<button class="search-btn" onclick="searchText()">🔍</button>
+
+</div>
+
+</header>
+
+<section>
+
+<div class="contact-box">
+
+<h2>تواصل معنا</h2>
+
+<input type="text" id="name">
+<input type="email" id="email">
+<textarea id="message" maxlength="200" onkeyup="updateCounter()"></textarea>
+
+<div class="counter" id="counter">0/200</div>
+
+<button class="contact-btn" id="sendBtn" onclick="validateForm()">ارسال</button>
+
+<div class="success" id="success">
+تم ارسال الرسالة بنجاح
+</div>
+
+<div class="company-info">
+<h3 id="companyTitle">معلومات الشركة</h3>
+<p>Email: lovinghomes@email.com</p>
+<p>Phone: +852 1234 5678</p>
+<p>Location: Hong Kong</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 Loving Homes</p>
+</footer>
+
+</body>
+</html>

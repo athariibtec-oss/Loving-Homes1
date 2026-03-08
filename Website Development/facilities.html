@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<title>المرافق</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#e6e6e6;
+display:flex;
+flex-direction:column;
+min-height:100vh;
+font-size:16px;
+}
+
+/* الشعار */
+.logo{
+position:absolute;
+top:10px;
+left:10px;
+width:110px;
+}
+
+header{
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.nav-box{
+background:#d9d9d9;
+padding:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.nav-btn{
+background:white;
+color:black;
+text-decoration:none;
+padding:8px 18px;
+border:1px solid #999;
+border-radius:5px;
+font-weight:bold;
+}
+
+.lang-btn{
+background:white;
+border:1px solid #999;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.access-btn{
+background:white;
+border:1px solid #999;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.search-box{
+padding:6px;
+border:1px solid #999;
+border-radius:5px;
+}
+
+.search-btn{
+padding:6px 10px;
+border:1px solid #999;
+background:white;
+cursor:pointer;
+}
+
+section{
+padding:40px;
+flex:1;
+background:#f2f2f2;
+margin:20px;
+border:1px solid #999;
+}
+
+#content{
+line-height:1.8;
+margin-bottom:25px;
+}
+
+.image-grid{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.image-grid img{
+width:calc(33% - 20px);
+border:1px solid #999;
+border-radius:5px;
+}
+
+footer{
+text-align:center;
+padding:15px;
+background:#d9d9d9;
+}
+
+mark{
+background:yellow;
+}
+
+</style>
+
+<script>
+
+let currentLang = localStorage.getItem("lang") || "ar";
+let fontSize = localStorage.getItem("fontSize") || 16;
+
+let textAr =
+"يقدم فندق Loving Homes مجموعة واسعة من المرافق الحديثة المصممة لتوفير بيئة آمنة ومريحة للكلاب أثناء إقامتها في الفندق. تشمل المرافق غرف إقامة مريحة مزودة بنظام تدفئة وتبريد تحت الأرضية بالإضافة إلى وجود تلفزيون لخلق بيئة هادئة للحيوانات. كما يوفر الفندق خدمة التوصيل من وإلى المكان لمساعدة أصحاب الحيوانات الأليفة على نقل كلابهم بسهولة. يحتوي الفندق أيضاً على مراعي خارجية آمنة تسمح للكلاب بالجري واللعب بحرية في بيئة طبيعية تحت إشراف فريق متخصص. كما تتوفر خدمات بيطرية على مدار 24 ساعة لضمان سلامة الحيوانات وتقديم الرعاية الصحية عند الحاجة. بالإضافة إلى ذلك توجد حظيرة لعب داخلية واسعة يمكن للكلاب استخدامها في جميع الأوقات وخاصة عندما يكون الطقس غير مناسب للخروج. يوفر الفندق أيضاً مساحة عشب خاصة للكلاب للعب والاسترخاء، إضافة إلى تنظيم رحلات تمشية في الغابات حيث يستطيع الكلب الاستمتاع بالمشي والنشاط البدني في بيئة طبيعية وآمنة. جميع هذه المرافق مصممة لضمان راحة وسلامة الحيوانات الأليفة وتوفير تجربة إقامة مميزة لها.";
+
+let textEn =
+"Loving Homes dog hotel provides a wide range of modern facilities designed to ensure a safe and comfortable stay for dogs. The hotel offers comfortable rooms equipped with underfloor heating and cooling systems as well as televisions to create a calm environment for pets. The hotel also provides a pick up and drop off transportation service to make it easier for pet owners to bring their dogs to the hotel. There are secure outdoor fields where dogs can run and play freely in a natural environment under the supervision of trained staff. Veterinary services are available 24 hours a day to ensure pets receive medical care whenever needed. In addition the hotel includes a large indoor play barn that allows dogs to stay active even when the weather is not suitable outside. There is also a private grass area where dogs can relax and play safely and the hotel organizes forest walking activities so dogs can enjoy exercise and fresh air in a natural environment. All these facilities are designed to provide comfort safety and wellbeing for every dog staying at Loving Homes.";
+
+window.onload=function(){
+document.body.style.fontSize=fontSize+"px";
+applyLanguage();
+}
+
+function changeLanguage(){
+currentLang=currentLang==="ar"?"en":"ar";
+localStorage.setItem("lang",currentLang);
+applyLanguage();
+}
+
+function increaseFont(){
+fontSize=parseInt(fontSize)+2;
+document.body.style.fontSize=fontSize+"px";
+localStorage.setItem("fontSize",fontSize);
+}
+
+function decreaseFont(){
+fontSize=Math.max(12,fontSize-2);
+document.body.style.fontSize=fontSize+"px";
+localStorage.setItem("fontSize",fontSize);
+}
+
+function applyLanguage(){
+
+document.documentElement.dir=currentLang==="ar"?"rtl":"ltr";
+
+document.getElementById("nav-home").innerText=currentLang==="ar"?"الصفحة الرئيسية":"Home";
+document.getElementById("nav-facilities").innerText=currentLang==="ar"?"المرافق":"Facilities";
+document.getElementById("nav-packages").innerText=currentLang==="ar"?"الحزم":"Packages";
+document.getElementById("nav-help").innerText=currentLang==="ar"?"المساعدة":"Help";
+document.getElementById("nav-services").innerText=currentLang==="ar"?"خدماتنا":"Services";
+document.getElementById("nav-contact").innerText=currentLang==="ar"?"اتصل بنا":"Contact";
+
+document.getElementById("btn-big").innerText=currentLang==="ar"?"تكبير النص":"Increase Text";
+document.getElementById("btn-small").innerText=currentLang==="ar"?"تصغير النص":"Decrease Text";
+
+document.getElementById("title").innerText=currentLang==="ar"?"المرافق":"Facilities";
+
+document.getElementById("content").innerText=currentLang==="ar"?textAr:textEn;
+
+document.getElementById("search").placeholder=currentLang==="ar"?"بحث":"Search";
+
+}
+
+function searchText(){
+
+let input=document.getElementById("search").value;
+let text=currentLang==="ar"?textAr:textEn;
+
+if(input===""){
+applyLanguage();
+return;
+}
+
+let regex=new RegExp(input,"gi");
+
+document.getElementById("content").innerHTML=text.replace(regex,function(match){
+return "<mark>"+match+"</mark>";
+});
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<img src="images/Image11.png" class="logo" alt="logo">
+
+<h1 id="title">المرافق</h1>
+
+<div class="nav-box">
+
+<button class="lang-btn" onclick="changeLanguage()">🌐</button>
+
+<button class="access-btn" id="btn-big" onclick="increaseFont()">تكبير النص</button>
+
+<button class="access-btn" id="btn-small" onclick="decreaseFont()">تصغير النص</button>
+
+<a href="index.html" class="nav-btn" id="nav-home">الصفحة الرئيسية</a>
+<a href="facilities.html" class="nav-btn" id="nav-facilities">المرافق</a>
+<a href="packages.html" class="nav-btn" id="nav-packages">الحزم</a>
+<a href="help.html" class="nav-btn" id="nav-help">المساعدة</a>
+<a href="services.html" class="nav-btn" id="nav-services">خدماتنا</a>
+<a href="contact.html" class="nav-btn" id="nav-contact">اتصل بنا</a>
+
+<input type="text" id="search" class="search-box">
+<button class="search-btn" onclick="searchText()">🔍</button>
+
+</div>
+
+</header>
+
+<section>
+
+<p id="content"></p>
+
+<div class="image-grid">
+
+<img src="images/2.jpg">
+<img src="images/3.jpg">
+<img src="images/4.jpg">
+<img src="images/5.jpg">
+<img src="images/6.jpg">
+<img src="images/7.jpg">
+
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 Loving Homes</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+body{
+margin:0;
+font-family:Arial;
+background-color:#b30000;
+color:white;
+text-align:right;
+}
+
+header{
+padding:20px;
+text-align:center;
+}
+
+.nav-box{
+background-color:white;
+padding:15px;
+margin-top:15px;
+text-align:center;
+}
+
+.nav-btn{
+background-color:#b30000;
+color:white;
+text-decoration:none;
+padding:8px 20px;
+margin:0 10px;
+display:inline-block;
+}
+
+section{
+padding:40px;
+}
+
+footer{
+background-color:#990000;
+padding:10px;
+margin-top:50px;
+text-align:center;
+}
+
+.content{
+display:flex;
+gap:40px;
+flex-wrap:wrap;
+align-items:center;
+justify-content:center;
+}
+
+.text-box{
+background:white;
+color:black;
+padding:20px;
+max-width:400px;
+line-height:1.8;
+}
+
+.carousel{
+width:500px;
+overflow:hidden;
+border:3px solid white;
+}
+
+.carousel-inner{
+display:flex;
+transition:transform 0.5s ease;
+}
+
+.carousel-inner img{
+width:500px;      /* عرض الصورة نفس عرض الكاروسيل */
+height:300px;
+object-fit:cover;
+flex-shrink:0;    /* يمنع ضغط الصور */
+}

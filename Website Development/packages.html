@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<title>الحزم</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#e6e6e6;
+display:flex;
+flex-direction:column;
+min-height:100vh;
+font-size:16px;
+}
+
+/* الشعار */
+
+.logo{
+position:absolute;
+top:10px;
+left:10px;
+width:110px;
+}
+
+/* الهيدر */
+
+header{
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.nav-box{
+background:#d9d9d9;
+padding:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.nav-btn{
+background:white;
+color:black;
+text-decoration:none;
+padding:8px 18px;
+border:1px solid #999;
+border-radius:5px;
+font-weight:bold;
+}
+
+.lang-btn{
+background:white;
+border:1px solid #999;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.access-btn{
+background:white;
+border:1px solid #999;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.search-box{
+padding:6px;
+border:1px solid #999;
+border-radius:5px;
+}
+
+.search-btn{
+padding:6px 10px;
+border:1px solid #999;
+background:white;
+cursor:pointer;
+}
+
+section{
+padding:40px;
+flex:1;
+background:#f2f2f2;
+margin:20px;
+border:1px solid #999;
+}
+
+.package-box{
+background:white;
+padding:20px;
+margin:15px 0;
+border:1px solid #999;
+line-height:1.8;
+}
+
+footer{
+text-align:center;
+padding:15px;
+background:#d9d9d9;
+}
+
+mark{
+background:yellow;
+}
+
+</style>
+
+<script>
+
+let currentLang = localStorage.getItem("lang") || "ar";
+let fontSize = localStorage.getItem("fontSize") || 16;
+
+let packagesAr = [
+
+"الحزمة المميزة هي الحزمة الاكثر شمولاً في فندق Loving Homes حيث توفر للكلب مجموعة كبيرة من الانشطة اليومية التي تساعده على البقاء نشيطا وسعيدا خلال فترة اقامته تشمل هذه الحزمة اربع نشاطات يومية مثل المشي في المساحات الخارجية الواسعة واللعب في مناطق اللعب الداخلية والاهتمام بنظافة الكلب ومتابعة حالته الصحية بشكل مستمر كما يحصل الكلب على رعاية فردية واهتمام خاص من فريق العمل ويتم ارسال تحديثات يومية وصور لاصحاب الحيوان الاليف حتى يبقوا على اطلاع بحالة كلبهم طوال فترة الاقامة",
+
+"الحزمة الكلاسيكية تقدم توازنا جيدا بين الراحة والنشاط حيث يحصل الكلب على ثلاث نشاطات يومية تشمل المشي في المساحات الخارجية واللعب في منطقة اللعب المخصصة وتنظيف مكان الاقامة الخاص به هذه الحزمة مناسبة للكلاب التي تحتاج الى نشاط معتدل ورعاية جيدة خلال فترة اقامتها في الفندق كما يحرص فريق العمل على مراقبة الكلاب وتقديم الرعاية اللازمة لضمان راحتها وسلامتها",
+
+"حزمة اليوم الواحد مصممة للكلاب التي تقيم في الفندق لفترة قصيرة خلال اليوم حيث يحصل الكلب على نشاطين يوميا مثل المشي القصير في المساحات الخارجية واللعب داخل منطقة اللعب الداخلية كما يتم توفير مكان مريح للراحة خلال فترات الاسترخاء هذه الحزمة مناسبة لاصحاب الكلاب الذين يحتاجون الى مكان امن لرعاية حيواناتهم الاليفة خلال يوم واحد",
+
+"الحزمة المخصصة توفر مرونة كاملة لاصحاب الحيوانات الاليفة الذين يحتاجون الى خدمات خاصة او اقامة طويلة حيث يمكن تصميم الحزمة حسب احتياجات الكلب مثل زيادة عدد الانشطة اليومية او توفير رعاية صحية اضافية او متابعة غذائية خاصة يتم الاتفاق على تفاصيل هذه الحزمة مع صاحب الحيوان الاليف لضمان توفير افضل مستوى من الرعاية"
+];
+
+let packagesEn = [
+
+"The premium package is the most complete option at Loving Homes dog hotel it provides a large number of daily activities that help dogs stay active healthy and happy during their stay",
+
+"The classic package provides a balanced level of care and activity",
+
+"The one day package is designed for dogs staying at the hotel for a short period during the day",
+
+"The custom package is designed for long stays or dogs with special requirements"
+];
+
+window.onload=function(){
+document.body.style.fontSize=fontSize+"px";
+applyLanguage();
+};
+
+function changeLanguage(){
+currentLang = currentLang==="ar" ? "en" : "ar";
+localStorage.setItem("lang",currentLang);
+applyLanguage();
+}
+
+function applyLanguage(){
+
+document.documentElement.lang=currentLang;
+document.documentElement.dir=currentLang==="ar"?"rtl":"ltr";
+
+document.getElementById("nav-home").innerText=currentLang==="ar"?"الصفحة الرئيسية":"Home";
+document.getElementById("nav-facilities").innerText=currentLang==="ar"?"المرافق":"Facilities";
+document.getElementById("nav-packages").innerText=currentLang==="ar"?"الحزم":"Packages";
+document.getElementById("nav-help").innerText=currentLang==="ar"?"المساعدة":"Help";
+document.getElementById("nav-services").innerText=currentLang==="ar"?"خدماتنا":"Services";
+document.getElementById("nav-contact").innerText=currentLang==="ar"?"اتصل بنا":"Contact";
+
+document.getElementById("title").innerText=currentLang==="ar"?"الحزم":"Packages";
+
+let boxes=document.querySelectorAll(".package-box");
+
+for(let i=0;i<boxes.length;i++){
+boxes[i].innerText=currentLang==="ar"?packagesAr[i]:packagesEn[i];
+}
+
+document.getElementById("btn-big").innerText=currentLang==="ar"?"تكبير النص":"Increase Text";
+document.getElementById("btn-small").innerText=currentLang==="ar"?"تصغير النص":"Decrease Text";
+document.getElementById("search").placeholder=currentLang==="ar"?"بحث":"Search";
+
+}
+
+function increaseFont(){
+fontSize=parseInt(fontSize)+2;
+document.body.style.fontSize=fontSize+"px";
+localStorage.setItem("fontSize",fontSize);
+}
+
+function decreaseFont(){
+fontSize=Math.max(12,fontSize-2);
+document.body.style.fontSize=fontSize+"px";
+localStorage.setItem("fontSize",fontSize);
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<img src="images/Image11.png" class="logo" alt="logo">
+
+<h1 id="title">الحزم</h1>
+
+<div class="nav-box">
+
+<button class="lang-btn" onclick="changeLanguage()">🌐</button>
+
+<button class="access-btn" id="btn-big" onclick="increaseFont()">تكبير النص</button>
+
+<button class="access-btn" id="btn-small" onclick="decreaseFont()">تصغير النص</button>
+
+<a href="index.html" class="nav-btn" id="nav-home">الصفحة الرئيسية</a>
+<a href="facilities.html" class="nav-btn" id="nav-facilities">المرافق</a>
+<a href="packages.html" class="nav-btn" id="nav-packages">الحزم</a>
+<a href="help.html" class="nav-btn" id="nav-help">المساعدة</a>
+<a href="services.html" class="nav-btn" id="nav-services">خدماتنا</a>
+<a href="contact.html" class="nav-btn" id="nav-contact">اتصل بنا</a>
+
+<input type="text" id="search" class="search-box" placeholder="بحث">
+
+<button class="search-btn">🔍</button>
+
+</div>
+
+</header>
+
+<section id="content">
+
+<div class="package-box"></div>
+<div class="package-box"></div>
+<div class="package-box"></div>
+<div class="package-box"></div>
+
+</section>
+
+<footer>
+<p>© 2026 Loving Homes</p>
+</footer>
+
+</body>
+</html>
